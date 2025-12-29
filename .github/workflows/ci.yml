@@ -63,3 +63,15 @@ jobs:
           curl -s https://api.spacexdata.com/v4/cores | head -c 100
           echo ""
           echo "✅ SpaceX API 连接正常"
+
+  deploy:
+    name: 部署到 Render
+    runs-on: ubuntu-latest
+    needs: [build, api-test]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    steps:
+      - name: 触发 Render 部署
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+          echo "✅ 已触发 Render 部署"

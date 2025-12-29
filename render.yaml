@@ -1,0 +1,10 @@
+# Render 部署配置
+services:
+  - type: web
+    name: rocket-recovery-system
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
