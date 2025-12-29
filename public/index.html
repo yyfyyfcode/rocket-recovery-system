@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 SpaceX 火箭回收系统</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🚀 SpaceX 火箭回收系统</h1>
+      <p class="subtitle">Rocket Recovery Dashboard</p>
+    </header>
+
+    <!-- 统计卡片 -->
+    <section class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-value" id="totalCores">--</div>
+        <div class="stat-label">芯级总数</div>
+      </div>
+      <div class="stat-card highlight">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value" id="activeCores">--</div>
+        <div class="stat-label">活跃芯级</div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value" id="successRate">--</div>
+        <div class="stat-label">着陆成功率</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-icon">♻️</div>
+        <div class="stat-value" id="maxReuse">--</div>
+        <div class="stat-label">最大复用次数</div>
+      </div>
+    </section>
+
+    <!-- 图表区域 -->
+    <section class="charts-grid">
+      <div class="chart-card">
+        <h3>📈 年度回收成功率趋势</h3>
+        <canvas id="yearlyChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>🎯 着陆方式分布</h3>
+        <canvas id="landingTypeChart"></canvas>
+      </div>
+    </section>
+
+    <!-- 着陆平台 -->
+    <section class="table-section">
+      <h3>🛬 着陆平台统计</h3>
+      <div class="table-wrapper">
+        <table id="landpadsTable">
+          <thead>
+            <tr>
+              <th>名称</th>
+              <th>类型</th>
+              <th>位置</th>
+              <th>尝试</th>
+              <th>成功</th>
+              <th>成功率</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 活跃芯级排行 -->
+    <section class="table-section">
+      <h3>🏆 芯级复用排行榜</h3>
+      <div class="table-wrapper">
+        <table id="coresTable">
+          <thead>
+            <tr>
+              <th>排名</th>
+              <th>编号</th>
+              <th>总飞行</th>
+              <th>复用次数</th>
+              <th>着陆成功</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 最近回收任务 -->
+    <section class="table-section">
+      <h3>📋 最近回收任务</h3>
+      <div class="table-wrapper">
+        <table id="recoveriesTable">
+          <thead>
+            <tr>
+              <th>任务名称</th>
+              <th>日期</th>
+              <th>着陆方式</th>
+              <th>复用</th>
+              <th>结果</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <p>数据来源：<a href="https://github.com/r-spacex/SpaceX-API" target="_blank">SpaceX API</a></p>
+      <p id="updateTime"></p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

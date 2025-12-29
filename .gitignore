@@ -1,0 +1,28 @@
+# 依赖目录
+node_modules/
+
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# IDE 配置
+.idea/
+*.swp
+*.swo
+
+# 构建输出
+dist/
+build/
+
+# 测试覆盖率
+coverage/
