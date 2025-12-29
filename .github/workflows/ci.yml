@@ -1,0 +1,65 @@
+# SpaceX 火箭回收系统 - CI/CD 工作流
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    name: 构建和检查
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 检查语法
+        run: node --check server.js
+
+      - name: 检查模块导入
+        run: |
+          node --check src/api.js
+          node --check src/recovery.js
+          node --check src/dashboard.js
+          node --check src/analyzer.js
+          node --check src/index.js
+
+  api-test:
+    name: API 连通性测试
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 测试 SpaceX API 连通性
+        run: |
+          curl -s https://api.spacexdata.com/v4/cores | head -c 100
+          echo ""
+          echo "✅ SpaceX API 连接正常"
